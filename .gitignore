@@ -1,0 +1,75 @@
+# Python bytecode
+*.pyc
+*.pyo
+__pycache__/
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+.ENV/
+*.env
+
+# Django specific
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.db
+
+# PostgreSQL specific
+*.pgpass
+pgdata/
+pg_log/
+
+# Celery related
+celerybeat-schedule
+celerybeat.pid
+*.pid
+*.worker_state
+
+# Redis related (if you store any state locally)
+*.rdb
+dump.rdb
+redis.conf
+
+# Environment variables
+.env
+
+# IDE specific (e.g., VSCode)
+.vscode/
+
+# Static files
+staticfiles/
+static/
+
+# Media files
+media/
+
+# Coverage reports
+htmlcov/
+.coverage
+.tox/
+.nox/
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Test and temp files
+.DS_Store
+*.swp
+*.swo
+*.swn
+*~
+.project
+*.tmp
+*.temp
+*.log
+logs/
+
+# System files
+Thumbs.db
+.DS_Store
