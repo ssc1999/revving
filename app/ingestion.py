@@ -8,12 +8,10 @@ def ingest_excel(file_path):
     df = pd.read_excel(file_path)
     revenue_sources = set()
     
-    # Create invoices
-    for _, row in df.iterrows():
+    for row in df.iterrows():
         revenue_source = row['Revenue source']
         
-        # Get or create an Invoice object
-        invoice, created = Invoice.objects.get_or_create(
+        _, created = Invoice.objects.get_or_create(
             invoice_number=row['invoice number'],
             customer=row['customer'],
             defaults={
@@ -29,7 +27,6 @@ def ingest_excel(file_path):
            
         if created:
             revenue_sources.add(revenue_source)
-    
     
     # Update totals only for the relevant revenue sources
     for revenue_source in revenue_sources:
