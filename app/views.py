@@ -3,9 +3,9 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from app.forms import UploadFileForm
-from .models import Invoice, Total
-from .ingestion import ingest_excel
+from .models import Total
 from django.conf import settings
+from . import tasks
 
 # TODO to test
 def get_invoice_totals(request):
@@ -25,7 +25,7 @@ def post_upload_invoices(request):
         with open(file_path, 'wb+') as destination:
             for chunk in file.chunks():
                 destination.write(chunk)
-        ingest_excel(file_path)
+        tasks.process_invoices.delay(file_path)
         return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'fail'}, status=400)
 
@@ -37,7 +37,7 @@ def upload_invoices(request):
         with open(file_path, 'wb+') as destination:
             for chunk in file.chunks():
                 destination.write(chunk)
-        ingest_excel(file_path)
+        tasks.process_invoices.delay(file_path)
         return redirect('invoice_totals')
     else:
         form = UploadFileForm()
