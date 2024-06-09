@@ -8,7 +8,8 @@ def ingest_excel(file_path):
     df = pd.read_excel(file_path)
     revenue_sources = set()
     
-    for row in df.iterrows():
+    # Create invoices
+    for _, row in df.iterrows():
         revenue_source = row['Revenue source']
         
         _, created = Invoice.objects.get_or_create(
