@@ -118,6 +118,13 @@ Navigate to http://127.0.0.1:8000/ to see the total values for each revenue sour
 ### All Invoices:
 Click the "View All Invoices" button on the home page to see the list of all invoices. This page supports pagination to display 20 invoices per page.
 
+### API Endpoints
+
+- Upload Invoices: POST http://127.0.0.1:8000/api/upload-invoice/
+- Get Invoice Totals: GET http://127.0.0.1:8000/api/invoice-totals/
+- Get All Invoices: GET http://127.0.0.1:8000/api/invoices/
+- Send Reminder Emails: GET http://127.0.0.1:8000/api/send-emails/
+
 ### Sending Reminder Emails (On testing phase)
 To send reminder emails to all customers, use the following endpoint, would be nice to do it periodically with redis-beat:
 
