@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Invoice Totals</h2>
+  <table id="invoice-table">
+    <thead>
+      <tr>
+        <th>Revenue Source</th>
+        <th>Total Value</th>
+        <th>Total Advance</th>
+        <th>Total Expected Fee</th>
+      </tr>
+    </thead>
+    <tbody id="invoice-data">
+      {% for total in totals %}
+      <tr>
+        <td>{{ total.revenue_source }}</td>
+        <td>{{ total.total_value }}</td>
+        <td>{{ total.total_advance }}</td>
+        <td>{{ total.total_expected_fee }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
