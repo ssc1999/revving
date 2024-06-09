@@ -1,8 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
+  <h2>Upload Invoices</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload</button>
+  </form>
+
   <h2>Invoice Totals</h2>
-  <table id="invoice-table">
+  <table id="totals-table">
     <thead>
       <tr>
         <th>Revenue Source</th>
@@ -11,7 +18,7 @@
         <th>Total Expected Fee</th>
       </tr>
     </thead>
-    <tbody id="invoice-data">
+    <tbody id="totals-data">
       {% for total in totals %}
       <tr>
         <td>{{ total.revenue_source }}</td>
@@ -22,4 +29,6 @@
       {% endfor %}
     </tbody>
   </table>
+
+  
 {% endblock %}

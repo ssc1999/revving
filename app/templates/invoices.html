@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>All Invoices</h2>
+<table id="invoice-table">
+  <thead>
+    <tr>
+      <th>Invoice Number</th>
+      <th>Customer</th>
+      <th>Date</th>
+      <th>Value</th>
+      <th>Haircut Percentage</th>
+      <th>Daily Fee</th>
+      <th>Currency</th>
+      <th>Revenue Source</th>
+      <th>Expected Duration</th>
+    </tr>
+  </thead>
+  <tbody id="invoice-data">
+    {% for invoice in invoices %}
+    <tr>
+      <td>{{ invoice.invoice_number }}</td>
+      <td>{{ invoice.customer }}</td>
+      <td>{{ invoice.date }}</td>
+      <td>{{ invoice.value }}</td>
+      <td>{{ invoice.haircut_percentage }}</td>
+      <td>{{ invoice.daily_fee }}</td>
+      <td>{{ invoice.currency }}</td>
+      <td>{{ invoice.revenue_source }}</td>
+      <td>{{ invoice.expected_duration }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
