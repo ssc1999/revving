@@ -6,4 +6,5 @@ urlpatterns = [
     path('upload-invoice/', views.index, name='upload_invoice'),
     path('invoice-totals/', views.get_invoice_totals, name='invoice_totals'),
     path('invoices/', views.load_invoices, name='load_invoices'),
+    path('send-emails/', views.send_remainder_emails, name='send_emails'),
 ]

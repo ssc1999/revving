@@ -4,11 +4,9 @@ import pandas as pd
 from django.conf import settings
 from django.core.paginator import Paginator
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
-from .forms import UploadFileForm
 from .models import Invoice, Total
-from . import tasks
+from .tasks import process_invoices, send_remainder_emails
 
 REQUIRED_COLUMNS = [
     'date',
@@ -39,7 +37,7 @@ def index(request):
         except Exception:
             return JsonResponse({'status': 'fail', 'message': 'File is not readable or not in correct format.'}, status=400)
 
-        tasks.process_invoices.delay(file_path)
+        process_invoices.delay(file_path)
         return JsonResponse({'status': 'success'})
 
     return JsonResponse({'status': 'fail', 'message': 'No file provided.'}, status=400)
@@ -73,3 +71,12 @@ def load_invoices(request):
         return JsonResponse(data, safe=False)
 
     return JsonResponse({'status': 'fail'}, status=400)
+
+
+def sendReminderEmails(request):
+    customers = Invoice.objects.values_list('customer', flat=True).distinct()
+    email_addresses = [f"{customer}@gmail.com" for customer in customers]
+
+    send_remainder_emails.delay(email_addresses)
+
+    return JsonResponse({'status': 'success'})
