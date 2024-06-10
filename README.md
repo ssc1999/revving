@@ -90,6 +90,11 @@ The server will be available at http://127.0.0.1:8000/.
 ## Importing the Data
 To import invoice data, follow these steps:
 
+### Run Redis
+```sh
+redis-server
+```
+
 ### Start the Celery worker:
 
 ```sh
